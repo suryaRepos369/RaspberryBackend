@@ -1,0 +1,156 @@
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Developement Server</title>
+
+  <style>
+    body {
+      background-color: white;
+    }
+
+    p {
+      color: black;
+      margin-left: 40px;
+      font-size: larger;
+    }
+
+    h1 {
+      margin: 1rem;
+      text-align: center;
+    }
+
+    .timer {
+      background-color: rgb(219, 100, 248);
+      padding: 2rem;
+      margin: 1rem;
+      border:
+        1px solid blue;
+      border-radius: 1rem;
+      text-align: center;
+    }
+
+    .timer-s {
+      background-color: red;
+    }
+
+    .startTime-div {
+      display: flex;
+      flex-direction: row;
+      background-color: blanchedalmond;
+      padding: 2rem;
+      font-size: x-large;
+
+    }
+  </style>
+
+  <header class="lead d-flex justify-content-center m-3 p-5">
+    <h1 class="">
+      Developement Server for the testing environment
+    </h1>
+  </header>
+
+</head>
+
+<body>
+  <div class="timer">
+    <p id="time">
+      </>
+    <div class="startTime-div">
+      <p>Server Uptime :</p>
+      <p id="timer-s"></p>
+
+    </div>
+
+
+    <div class="startTime-div">
+      <p>Server started at :</p>
+      <p id='startTime'></p>
+    </div>
+    <div class="cpu-div">
+      <p>Cpu temperature is :</p>
+      <p id='cputemp'></p>
+      <div>
+        <p>Last updated at</p>
+        <p id="measuredTime"></p>
+      </div>
+    </div>
+
+
+  </div>
+  <script>
+    var startTime;
+    var timer;
+    var cputemp
+
+
+    function seconds2time(seconds) {
+      var hours = Math.floor(seconds / 3600);
+      var minutes = Math.floor((seconds - hours * 3600) / 60);
+      var seconds = seconds - hours * 3600 - minutes * 60;
+      var time = "";
+      if (hours != 0) {
+        time = hours + ":";
+      }
+      if (minutes != 0 || time !== "") {
+        minutes = minutes < 10 && time !== "" ? "0" + minutes : String(minutes);
+        time += minutes + ":";
+      }
+      if (time === "") {
+        time = seconds + "s";
+      } else {
+        time += seconds < 10 ? "0" + seconds : String(seconds);
+      }
+      return time;
+    }
+
+    fetch("http://192.168.43.16:3030/timer").then((res) =>
+      res.json()).then((data) => {
+        startTime = data.startTimer;
+        console.log('data.startTime:', data.startTimer)
+        timer = data.timer
+        document.getElementById("startTime").innerHTML = data.startTimer
+
+        console.log(data)
+      }).catch((e) => {console.log(e)})
+
+
+
+    setInterval(fetchCputemp, 5000)
+    function fetchCputemp() {
+      fetch("http://192.168.43.16:3030/cpu").then((res) =>
+        res.json()).then((data) => {
+
+          document.getElementById("cputemp").innerHTML = data[0].cpuTemp
+          document.getElementById("measuredTime").innerHTML = new Date(data[0].createdAt);
+
+
+        }).catch((e) => {console.log(e)})
+
+    }
+
+
+
+
+
+
+
+    setInterval(myTimer, 1000); function myTimer() {
+
+
+      document.getElementById("timer-s").innerHTML = seconds2time(timer)
+      timer++
+
+
+    }
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
