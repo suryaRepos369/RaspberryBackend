@@ -35,9 +35,7 @@ app.get("", (req, res) => {
   res.render("home");
 });
 
-app.get("/switch",(req,res)=>{
-res.render("switch")
-})
+
 
 
 app.get("*", (req, res) => {

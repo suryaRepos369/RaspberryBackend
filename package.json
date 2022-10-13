@@ -26,16 +26,16 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "dotenv": "^16.0.2",
-    "nodemon": "^2.0.19"
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/suryaRepos369/task-manager.git"
+    "url": "git+https://github.com/suryaRepos369/RaspberryBackend.git"
   },
   "bugs": {
-    "url": "https://github.com/suryaRepos369/task-manager/issues"
+    "url": "https://github.com/suryaRepos369/RaspberryBackend/issues"
   },
-  "homepage": "https://github.com/suryaRepos369/task-manager#readme",
+  "homepage": "https://github.com/suryaRepos369/Raspberrybackend#readme",
   "description": ""
 }
