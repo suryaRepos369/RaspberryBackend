@@ -21,7 +21,7 @@ const lightSchema = new mongoose.Schema({
     type: String,
   },
   runTime: {
-    type: Number,
+    type: String,
   },
 });
 
