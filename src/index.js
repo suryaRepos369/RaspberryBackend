@@ -39,8 +39,8 @@ server.listen(port, () => {
 
 io.on("connection", async (socket) => {
   //!initial pin status  check up while a new device is connected
-  let readState = light.status();
-  console.log('readState:', readState)
+  let readState = light.status(0);
+  console.log("readState:", readState);
 
   console.log("led status:", readState);
   console.log("device connected", socket.id);
@@ -52,7 +52,7 @@ io.on("connection", async (socket) => {
 
   socket.on("sendlightData", (data) => {
     light.ledControl(data);
-    console.log('STATE BEFORE SENDING',light.status(data.lightNo))
+    console.log("STATE BEFORE SENDING", light.status(data.lightNo));
     io.emit("status", light.status(data.lightNo));
   });
 
