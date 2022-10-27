@@ -70,14 +70,12 @@ router.post("/putLightStatus", async (req, res) => {
       }
     } else {
       const lightsStatus = new Light(req.body);
-      console.log("lightsStatus:", lightsStatus);
+      //console.log("lightsStatus:", lightsStatus);
 
       try {
         let createdData = await lightsStatus.save();
+        console.log("Successfully INSERTED INTO DB ==>",createdData)
         res.status(200).send(createdData);
-        try {
-          await Light;
-        } catch (error) {}
       } catch (error) {
         res.status(404).send(error.message);
       }

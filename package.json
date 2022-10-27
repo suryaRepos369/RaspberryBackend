@@ -19,6 +19,7 @@
     "hbs": "^4.2.0",
     "http": "^0.0.1-security",
     "mongoose": "^6.6.7",
+    "onoff": "^6.0.3",
     "socket.io": "^4.5.3"
   },
   "devDependencies": {
